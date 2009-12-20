@@ -1,13 +1,14 @@
 use strict;
 use warnings;
 
-use Test::More tests => 1;                      # last test to print
+use Test::More;    # last test to print
 
 my %solution = (
     205 => '0.5731441',
+    96  => 24702,
 );
 
-for my $p ( sort { $a <=> $b } keys %solution ) {
+for my $p ( $ENV{EULER} or sort { $a <=> $b } keys %solution ) {
     my $m = "ProjectEuler/Problem/$p.pm";
     require $m;
     $m =~ s/\.pm//;
@@ -17,5 +18,5 @@ for my $p ( sort { $a <=> $b } keys %solution ) {
     diag "took ", ( time - $time ), " seconds";
 }
 
-
+done_testing();
 
