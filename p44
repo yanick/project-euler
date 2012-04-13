@@ -1,0 +1,31 @@
+
+use 5.12.0;
+
+sub pentagonal {
+    my $i = int shift;
+    return $i * ( 3 * $i - 1 ) / 2;
+}
+
+sub is_pentagonal {
+    my $x = shift;
+    my $index = ( 0.5 + sqrt( 0.25 + 6 * $x ) ) / 3;
+    return $x == pentagonal($index);
+}
+
+my $i = 1;
+my @list;
+
+D:
+while(1) {
+    my $n = pentagonal($i++);
+    say $n;
+
+    for ( @list ) {
+        next unless is_pentagonal( ( $n + $_ ) / 2 );
+        next unless( is_pentagonal( ( $n - $_ ) / 2 ) );
+        die ">>> $n $_"; 
+    }
+
+    push @list, $n;
+}
+
